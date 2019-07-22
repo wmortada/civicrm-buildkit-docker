@@ -1,0 +1,5 @@
+# CiviCRM Buildkit Docker aliases
+alias bku='docker-compose --file $HOME/Docker/civicrm/civicrm-buildkit-docker/docker-compose-build.yml up -d'
+alias bkc='docker-compose --file $HOME/Docker/civicrm/civicrm-buildkit-docker/docker-compose-build.yml exec -u buildkit civicrm'
+alias bkb='docker-compose --file $HOME/Docker/civicrm/civicrm-buildkit-docker/docker-compose-build.yml exec -u buildkit civicrm bash'
+alias bk='docker-compose --file $HOME/Docker/civicrm/civicrm-buildkit-docker/docker-compose-build.yml'
