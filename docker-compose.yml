@@ -1,7 +1,6 @@
-version: '3.4'
+version: "3.6"
 
 services:
-
   civicrm:
     image: michaelmcandrew/civicrm-buildkit
     hostname: civicrm
@@ -11,7 +10,7 @@ services:
     links:
       - mysql
     ports:
-      - "8080:8080"
+      - "7979:7979"
     volumes:
       - buildkit:/buildkit
       - ./build:/buildkit/build
