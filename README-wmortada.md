@@ -15,7 +15,7 @@ Follow instructions in main [README](README.md).
 
 If there have been changes to the image it can be rebuilt by running: 
 
-`docker-compose -f docker-compose-build.yml up --build`
+`docker-compose -f docker-compose-build.yml build`
 
 ## Publishing
 
@@ -23,6 +23,6 @@ See instructions in main [README](README.md).
 
 Rather than installing PHP and composer locally, this can be done using Docker images as follows:
 
-* `cd publish`
-* `docker run --rm --interactive --tty --volume $PWD:/app composer install`
-* `docker run -it --rm --name publish-script -v "$PWD":/usr/src/myapp -w /usr/src/myapp php:7.2-cli php publish.php`
+1. `cd publish`
+1. `docker run -it --rm -v "$PWD":/app composer install`
+1. `docker run -it --rm -v "$PWD":/usr/src/myapp -w /usr/src/myapp php:latest php publish.php`
