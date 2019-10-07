@@ -11,18 +11,36 @@ To get around the issue of a different UID (1001 rather than 1000), we need to u
 
 ## Upgrading
 
-Follow instructions in main [README](README.md).
+The docker image can be updated with the following commands:
 
-If there have been changes to the image it can be rebuilt by running: 
+```bash
+bk down
+git checkout master
+git pull upstream master
+docker volume rm civicrm-buildkit-docker_buildkit
+bk build
+bku
+```
 
-`docker-compose -f docker-compose-build.yml build`
+See instructions in [README](README.md#upgrading) for details.
+
+Buildkit can be upgraded with the following commands:
+
+```bash
+bkc git pull
+bkc ./bin/civi-download-tools
+```
+
+See [documentation](https://docs.civicrm.org/dev/en/latest/tools/buildkit/#upgrading) for more details.
 
 ## Publishing
 
-See instructions in main [README](README.md).
+See instructions in [README](publish/README.md).
 
 Rather than installing PHP and composer locally, this can be done using Docker images as follows:
 
-1. `cd publish`
-1. `docker run -it --rm -v "$PWD":/app composer install`
-1. `docker run -it --rm -v "$PWD":/usr/src/myapp -w /usr/src/myapp php:latest php publish.php`
+```bash
+cd publish
+docker run -it --rm -v "$PWD":/app composer install
+docker run -it --rm -v "$PWD":/usr/src/myapp -w /usr/src/myapp php:latest php publish.php
+```
