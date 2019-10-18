@@ -32,15 +32,3 @@ bkc ./bin/civi-download-tools
 ```
 
 See [documentation](https://docs.civicrm.org/dev/en/latest/tools/buildkit/#upgrading) for more details.
-
-## Publishing
-
-See instructions in [README](publish/README.md).
-
-Rather than installing PHP and composer locally, this can be done using Docker images as follows:
-
-```bash
-cd publish
-docker run -it --rm -v "$PWD":/app composer install
-docker run -it --rm -v "$PWD":/usr/src/myapp -w /usr/src/myapp php:latest php publish.php
-```
