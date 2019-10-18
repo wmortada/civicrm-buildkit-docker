@@ -1,4 +1,4 @@
-FROM php:7.2-apache
+FROM php:7.2-apache-stretch
 
 # Install apt packages
 #
@@ -7,7 +7,6 @@ FROM php:7.2-apache
 # * imagick: libmagickwand-dev
 # * imap: libc-client-dev, libkrb5-dev
 # * intl: libicu-dev
-# * mcrypt: libmcrypt-dev
 # * soap: libxml2-dev
 # * zip: zlib1g-dev
 #
@@ -17,11 +16,14 @@ FROM php:7.2-apache
 # * sudo
 # * unzip
 # * zip
-# * node 9.x (from nodesource repository)
 #
 # iproute2 is required to get host ip from container
 
-RUN curl -sL https://deb.nodesource.com/setup_9.x | bash \
+RUN apt-get update \
+  && apt-get install -y --no-install-recommends \
+  apt-transport-https
+
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - \
   && apt-get update \
   && apt-get install -y --no-install-recommends \
   git \
@@ -31,16 +33,15 @@ RUN curl -sL https://deb.nodesource.com/setup_9.x | bash \
   libjpeg62-turbo-dev \
   libkrb5-dev \
   libmagickwand-dev \
-  libmcrypt-dev \
   libpng-dev \
   libxml2-dev \
   msmtp-mta \
-  mysql-client \
+  default-mysql-client \
   nodejs \
   sudo \
   unzip \
   zip \
-  zlib1g-dev \
+  libzip-dev \
   && rm -r /var/lib/apt/lists/*
 
 # Install php extensions (curl, json, mbstring, openssl, posix, phar
@@ -123,6 +124,8 @@ COPY apache24-vhost.php /buildkit/build/.amp/apache24-vhost.php
 USER root
 
 COPY ./docker-civicrm-entrypoint /usr/local/bin
+
+RUN chmod u+x /usr/local/bin/docker-civicrm-entrypoint
 
 ENTRYPOINT [ "docker-civicrm-entrypoint" ]
 
