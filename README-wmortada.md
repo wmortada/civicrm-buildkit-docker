@@ -18,7 +18,7 @@ bk down
 git checkout master
 git pull upstream master
 docker volume rm civicrm-buildkit-docker_buildkit
-bk build
+bk build --no-cache
 bku
 ```
 
