@@ -7,7 +7,6 @@ These are additional instructions to complement the main [README](README.md) fil
 To get around the issue of a different UID (1001 rather than 1000), we need to use the `docker-compose-build.yml` file rather than `docker-compose.yml`.
 
 * Copy the bash aliases from `bash_aliases.txt` into your bash aliases file (`~/.bash_aliases`).
-* Add `startup.sh` as a run script in PhpStorm.
 
 ## Upgrading
 
