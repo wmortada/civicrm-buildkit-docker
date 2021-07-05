@@ -1,4 +1,4 @@
-FROM php:7.3-apache-stretch
+FROM php:7.4-apache-buster
 
 # Install apt packages
 #
@@ -58,7 +58,7 @@ RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
 # Install php extensions (curl, json, mbstring, openssl, posix, phar
 # are installed already and don't need to be specified here)
 RUN docker-php-ext-install bcmath \
-  && docker-php-ext-configure gd --with-jpeg-dir=/usr/include/ --with-png-dir=/usr/include/ \
+  && docker-php-ext-configure gd --with-jpeg \
   && docker-php-ext-install gd \
   && docker-php-ext-install gettext \
   && docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
@@ -111,6 +111,9 @@ RUN mkdir .composer
 RUN mkdir .drush
 
 RUN mkdir .npm
+
+# Temporary fix - see https://github.com/civicrm/civicrm-buildkit/issues/635
+RUN rm package-lock.json
 
 RUN civi-download-tools
 
